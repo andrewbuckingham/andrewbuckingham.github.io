@@ -9,7 +9,7 @@ description: ''
 keywords:
 author: Andrew Buckingham
 language: en
-timezone: ''
+timezone: 'Europe/London'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
@@ -58,6 +58,7 @@ prismjs:
 mermaid:
   enable: true
 
+
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)
@@ -99,7 +100,8 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+#theme: landscape
+theme: ascent
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
