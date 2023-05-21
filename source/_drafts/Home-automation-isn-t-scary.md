@@ -96,7 +96,7 @@ With just 1 type of device to automate... Well, there's only 1 option. Increase 
 
 My automation journey started with [Tado](https://tado.com) home heating control to optimise gas usage. From there, almost all of my home automation journey has been about carbon reduction. And I love it: real problem-solving and a tangible environmental benefit.
 
-To show how home automation becomes a journey, increasing in creativity as you add more aspects, I'll leave you with a diagram representing my own journey. I started small on the left side, with the Tado heating. Then each time I added new capabilities, they've multiplied-up to become more creative and sophisticated along the way. I'll dive into these in more detail in later posts.
+To show how home automation becomes a journey, increasing in creativity as you add more aspects, I'll leave you with a tube map representing my own journey. I started small on the left side, with the Tado heating. Then each time I added new capabilities, they've multiplied-up to become more creative and sophisticated along the way. I'll dive into these in more detail in later posts.
 
 ```mermaid
     gitGraph
