@@ -11,6 +11,12 @@ author: Andrew Buckingham
 language: en
 timezone: 'Europe/London'
 
+menu:
+  Home: /
+  Archives: /archives
+  Categories: /categories
+
+
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: https://andrewbuckingham.github.io
@@ -74,7 +80,9 @@ index_generator:
 # Category & Tag
 default_category: uncategorized
 category_map:
+  - home-automation
 tag_map:
+  - node-red
 
 # Metadata elements
 ## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta

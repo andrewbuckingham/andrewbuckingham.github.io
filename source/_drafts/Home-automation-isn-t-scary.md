@@ -1,6 +1,7 @@
 ---
 title: Home automation isn't scary
-tags:
+categories: [home-automation]
+tags: [node-red]
 ---
 
 Not so long ago, the height of home automation was aspiring to a garage with a remote controlled door. Simpler times.
@@ -44,7 +45,7 @@ In many cases it will configure itself completely automatically. Here's a screen
 
 If the scale of Home Assistant sounds intimidating: don't worry about exactly what you want to do, and give it a try. The first time you use it will probably be a throw-away attempt anyway, so use it to experiment.
 
-The easiest way to install Home Assistant is on a [Raspberry Pi](https://www.raspberrypi.com/). Given you're interested enough to have read this far, then you're probably the kind of person who's got (or would enjoy) a Raspberry Pi to play with generally. I won't go through the install instructions here, but the instructions on the [Home Assistant Raspberry Pi guide](https://www.home-assistant.io/installation/raspberrypi) are pretty straightforward.
+The easiest way to install Home Assistant is on a [Raspberry Pi](https://www.raspberrypi.com/). Given you're interested enough to have read this far, then you're probably the kind of person who's got (or would enjoy) a Raspberry Pi to play with generally. I won't go through the install instructions here because the [Home Assistant Raspberry Pi guide](https://www.home-assistant.io/installation/raspberrypi) is pretty straightforward.
 
 # Start small
 
@@ -94,7 +95,7 @@ Because home automation is about combining things in interesting ways, your scop
 
 With just 1 type of device to automate... Well, there's only 1 option. Increase that to 5, and—mathematicians, look away now—you've got *n!* = 120 ways to combine them!
 
-My automation journey started with [Tado](https://tado.com) home heating control to optimise gas usage. From there, almost all of my home automation journey has been about carbon reduction. And I love it: real problem-solving and a tangible environmental benefit.
+My automation journey started with [Tado](https://tado.com) home heating control to optimise gas usage. From there, almost everything has been about carbon reduction. And I love it: real problem-solving and a tangible environmental benefit.
 
 To show how home automation becomes a journey, increasing in creativity as you add more aspects, I'll leave you with a tube map representing my own journey. I started small on the left side, with the Tado heating. Then each time I added new capabilities, they've multiplied-up to become more creative and sophisticated along the way. I'll dive into these in more detail in later posts.
 
