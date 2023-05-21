@@ -10,6 +10,15 @@
     <priority>0.6</priority>
   </url>
   
+  <url>
+    <loc>https://andrewbuckingham.github.io/categories/index.html</loc>
+    
+    <lastmod>2023-05-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
   <url>
     <loc>https://andrewbuckingham.github.io/</loc>
