@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Hexo</title>
+  <title>Curiouser²</title>
   
   
   <link href="https://andrewbuckingham.github.io/atom.xml" rel="self"/>
   
   <link href="https://andrewbuckingham.github.io/"/>
-  <updated>2023-05-21T13:58:34.478Z</updated>
+  <updated>2023-05-21T14:07:46.246Z</updated>
   <id>https://andrewbuckingham.github.io/</id>
   
   <author>
@@ -21,15 +21,15 @@
     <link href="https://andrewbuckingham.github.io/2023/05/20/about/me/"/>
     <id>https://andrewbuckingham.github.io/2023/05/20/about/me/</id>
     <published>2023-05-20T10:09:29.000Z</published>
-    <updated>2023-05-21T13:58:34.478Z</updated>
+    <updated>2023-05-21T14:07:46.246Z</updated>
     
-    <content type="html"><![CDATA[<p>I’m a STEM enthusiast and software professional living in the United Kingdom.</p><p>This blog came about because someone made me think about my personal values. It’s not something I’d thought about consciously before. Something came to mind immediately: curiosity about the world around us, and wanting to enthuse other people to be curious too.</p><p>So it’s likely my hobbies and interests will pop up here. I’m fortunate to have a lovely wife and son who enjoy the same things as me, too. In absolutely no order: cycle touring, photography, home automation, board games, astronomy, and comedy.</p><p>I’ll also blog about software tech. I work as a software consultant for Waterstons: a technology company with offices in the UK and Australia. This introduces me to organisations who are doing amazing things in their own industries, and gives me the scope to learn technology that will help them.</p>]]></content>
+    <content type="html"><![CDATA[<p>I’m a STEM enthusiast and software professional living in the United Kingdom.</p><p>This blog came about because someone asked me to describe my personal values. It’s not something I’d thought about consciously before, but the answer came immediately: curiosity about the world around us, and wanting to enthuse other people to be curious too.</p><p>So it’s likely my hobbies and interests will pop up here. I’m fortunate to have a lovely wife and son who enjoy the same things as me, too. In absolutely no order: cycle touring, photography, home automation, board games, astronomy, and comedy.</p><p>I’ll also blog about software tech. I work as a software consultant for Waterstons: a technology company with offices in the UK and Australia. This introduces me to organisations who are doing amazing things in their own industries, and gives me the scope to be curious about technology that will help them. I’d like to share some of that curiosity here.</p>]]></content>
     
     
       
       
     <summary type="html">&lt;p&gt;I’m a STEM enthusiast and software professional living in the United Kingdom.&lt;/p&gt;
-&lt;p&gt;This blog came about because someone made me think a</summary>
+&lt;p&gt;This blog came about because someone asked me to des</summary>
       
     
     
