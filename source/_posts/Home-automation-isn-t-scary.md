@@ -1,8 +1,12 @@
 ---
 title: Home automation isn't scary
-categories: [home-automation]
-tags: [node-red]
+tags:
+  - node-red
+categories:
+  - home-automation
+date: 2023-05-26 13:12:19
 ---
+
 
 Not so long ago, the height of home automation was aspiring to a garage with a remote controlled door. Simpler times.
 
@@ -35,7 +39,7 @@ For most of the fun stuff, you'll want to break out of the corporate world. And 
 
 # Home Assistant
 
-This is a truly amazing piece of software. And it's free. Run [Home Assistant](https://www.home-assistant.io/) on a computer in your home and it'll let you combine your smart devices in powerful ways.
+This is a truly amazing piece of software. And it's free! Run [Home Assistant](https://www.home-assistant.io/) on a computer in your home and it'll let you combine your smart devices in powerful ways.
 
 In many cases it will configure itself completely automatically. Here's a screenshot from my Home Assistant: entirely of its own accord it's discovered a Sony smart TV and a Brother laser printer (yes, an *actual printer*...)
 
