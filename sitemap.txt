@@ -1,3 +1,6 @@
 https://andrewbuckingham.github.io/2023/05/20/about/me/
 https://andrewbuckingham.github.io/categories/index.html
+https://andrewbuckingham.github.io/2023/05/26/Home-automation-isn-t-scary/
 https://andrewbuckingham.github.io/
+https://andrewbuckingham.github.io/tags/node-red/
+https://andrewbuckingham.github.io/categories/home-automation/
