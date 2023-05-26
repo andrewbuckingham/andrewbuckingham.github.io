@@ -1,3 +1,4 @@
 [submodule "ascent"]
 	path = themes/ascent
-	url = https://github.com/cjquines/hexo-theme-ascent
+	url = https://github.com/andrewbuckingham/hexo-theme-ascent
+	branch = feature/google-tag-manager

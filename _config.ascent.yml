@@ -2,3 +2,8 @@ menu:
   Home: /
   Archives: /archives
   About: /2023/05/20/about/me/
+
+# Google Analytics
+google_analytics:
+  enable: true
+  acct_ga4: "G-12TTYHVW2Q"
