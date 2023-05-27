@@ -128,7 +128,6 @@ To show how home automation becomes a journey, increasing in creativity as you a
       checkout Home_Assistant_capabilities
       commit id: "Added Wifi Plugs"
 
-      branch Banana order: 2
       branch Power_efficiency order: 2
       merge House_data_intelligence
       commit id: "Automated clothes drying"
