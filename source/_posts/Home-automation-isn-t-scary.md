@@ -103,59 +103,61 @@ My automation journey started with [Tado](https://tado.com) home heating control
 
 To show how home automation becomes a journey, increasing in creativity as you add more aspects, I'll leave you with a tube map representing my own journey. I started small on the left side, with the Tado heating. Then each time I added new capabilities, they've multiplied-up to become more creative and sophisticated along the way. I'll dive into these in more detail in later posts.
 
-```mermaid
-    gitGraph
-        branch "Home Assistant capabilities"
-        commit id: "Raspberry Pi!"
-        commit id: "Added Tado heating"
-        commit id: "Added Node-RED"
-        commit id: "Added watertank sensor"
+{% mermaid %}
+%%{init: { 'logLevel': 'debug', 'theme': 'base', 'gitGraph': {'showBranches': true, 'showCommitLabel': true, 'mainBranchName': 'Home_Assistant_Journey!', 'mainBranchOrder': 0}} }%%
+  gitGraph
+      branch Home_Assistant_capabilities
+      commit id: "Raspberry Pi!"
+      commit id: "Added Tado heating"
+      commit id: "Added Node-RED"
+      commit id: "Added watertank sensor"
 
-        branch "House data intelligence" order: 3
-        commit id: "Temp and humidity calcs"
-        commit id: "Fancy charts"
-        commit id: "Rate of change calcs"
+      branch House_data_intelligence order: 3
+      commit id: "Temp and humidity calcs"
+      commit id: "Fancy charts"
+      commit id: "Rate of change calcs"
 
-        checkout "Home Assistant capabilities"
+      checkout Home_Assistant_capabilities
 
-        commit id: " "
-        branch "Water heating efficiency" order: 1
-        merge "House data intelligence"
-        commit id: "Detect showers on"
-        commit id: "Heat hot water using Tado"
+      commit id: " "
+      branch Water_heating_efficiency order: 1
+      merge House_data_intelligence
+      commit id: "Detect showers on"
+      commit id: "Heat hot water using Tado"
 
-        checkout "Home Assistant capabilities"
-        commit id: "Added Wifi Plugs"
+      checkout Home_Assistant_capabilities
+      commit id: "Added Wifi Plugs"
 
-        branch "Power efficiency" order: 2
-        merge "House data intelligence"
-        commit id: "Automated clothes drying"
+      branch Banana order: 2
+      branch Power_efficiency order: 2
+      merge House_data_intelligence
+      commit id: "Automated clothes drying"
 
-        checkout "Home Assistant capabilities"
-        commit id: "Added home/away detection"
+      checkout Home_Assistant_capabilities
+      commit id: "Added home/away detection"
 
-        checkout "Power efficiency"
-        merge "Home Assistant capabilities"
-        commit id: "Automated coffee machine"
-        commit id: "Automated Octopus Energy Saving"
+      checkout Power_efficiency
+      merge Home_Assistant_capabilities
+      commit id: "Automated coffee machine"
+      commit id: "Automated Octopus Energy Saving"
 
-        checkout "Home Assistant capabilities"
-        commit id: "Added Solar PV Battery integration"
+      checkout Home_Assistant_capabilities
+      commit id: "Added Solar PV Battery integration"
 
-        branch "Solar PV efficiency" order: 4
-        commit id: "Gather Solar PV Stats"
-        commit id: "Predict energy use"
+      branch Solar_PV_efficiency order: 4
+      commit id: "Gather Solar PV Stats"
+      commit id: "Predict energy use"
 
-        checkout "Power efficiency"
-        merge "Solar PV efficiency"
-        commit id: "Turn on dishwasher when optimal"
+      checkout Power_efficiency
+      merge Solar_PV_efficiency
+      commit id: "Turn on dishwasher when optimal"
 
-        checkout "Solar PV efficiency"
-        commit id: "Optimise overnight charging"
+      checkout Solar_PV_efficiency
+      commit id: "Optimise overnight charging"
 
-        checkout "Home Assistant capabilities"
-        commit id: "Add voice control"
-```
+      checkout Home_Assistant_capabilities
+      commit id: "Add voice control"
+{% endmermaid %}
 *(for any Git-nerds: you're right, I did use [Gitgraph/Mermaid](https://mermaid.js.org/syntax/gitgraph.html) for this diagram)*
 
 [^1]: https://www.theguardian.com/technology/2021/sep/07/amazon-uk-arm-pays-38m-more-corporation-tax-despite-19bn-sales-rise
