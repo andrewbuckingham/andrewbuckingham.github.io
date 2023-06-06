@@ -5,7 +5,7 @@ menu:
 
 # Google Analytics
 google_analytics:
-  enable: false
+  enable: true
   acct_ga4: "G-12TTYHVW2Q"
 
 # Word count (needs hexo-wordcount)
@@ -13,10 +13,10 @@ word_count: true
 
 # mermaid chart
 mermaid: ## mermaid url https://github.com/knsv/mermaid
-  enable: true  # default true
+  enable: true # default true
   version: "7.1.2" # default v7.1.2
-  options:  # find more api options from https://github.com/knsv/mermaid/blob/master/src/mermaidAPI.js
-  startOnload: true  #// default true
+  options: # find more api options from https://github.com/knsv/mermaid/blob/master/src/mermaidAPI.js
+  startOnload: true #// default true
 
 mastadon:
   enable: true
