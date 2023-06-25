@@ -82,9 +82,12 @@ default_category: uncategorized
 category_map:
   - home-automation
   - stem
+  - software-development
 tag_map:
   - node-red
   - solar
+  - design
+  - aerospace
 
 # Metadata elements
 ## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
