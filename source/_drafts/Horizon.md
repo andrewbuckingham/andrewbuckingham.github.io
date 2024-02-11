@@ -7,7 +7,7 @@ date: 2024-02-10 20:39:30
 ---
 # Why should you care?
 
-Horizon. Another failed £1bn government IT project. So what? OK it's a waste of money, but _plus ça change_?
+Post Office Horizon. Another failed £1bn government IT project. So what? OK it's a waste of money, but _plus ça change_?
 
 Here's why.
 
@@ -16,15 +16,13 @@ Because this failure is associated with:
 - 4,000 people falsely accused of fraud or mismanagement
 - 700 people prosecuted
 - 200 people sent to prison
-- 3 people's death
+- 3 people's deaths
 
 I use the word "people" 4 times, deliberately. Because this is about _people_. The people affected; and the people responsible.
 
-I'm usually incredibly proud of being in the software industry. I believe in it a force for good, helping people achieve more and live more comfortably. But when discussing Horizon with a colleague, he asked: "is this our industry's Grenfell?"
-
 # What's Horizon?
 
-Horizon is a £1bn IT system developed for UK Government departments to computerise social security payments. When development began in 1996, it was intended for use by the UK Government benefits agency and the state-owned Post Office.
+Horizon is a £1bn IT system enabling UK Government departments to make social security payments. When development began in 1996, it was designed for the UK Government benefits agency and the state-owned Post Office.
 
 Post Offices are run in a franchise-like way by "Sub Postmasters" (**SPMs**). These are _people_ who ran their Post Offices quietly and successfully for many years prior to Horizon.
 
@@ -32,27 +30,29 @@ Post Offices are run in a franchise-like way by "Sub Postmasters" (**SPMs**). Th
 
 When Horizon was rolled out to Sub Postmasters they began noticing financial errors. Money was going missing.
 
-Rather than investigating the IT system, Post Office robustly turned the problem back on the Sub Postmasters, requiring them to firstly make-good the shortfalls without opportunity for dispute [Hamilton Others v Post Office, 2021].
+Important context: Horizon had already "failure[d] to meet the first milestone [which] cannot but cause concern in a project with such a chequered history". This is a quote from the Parliamentary Select Committee report[^1] in 1999. The same report tells us the UK benefits agency had pulled out of the project by 1999, leaving Post Office as sole client (and financier) of Horizon.
 
-When shortfalls were later escalated to Post Office auditors, SPMs were routinely prosecuted. They were wrongfully pressured [Fraser J, Judgment No 3] into admitting charges of mismanagement and repaying the "missing" money, under the threat that they would otherwise risk prison if they denied wrongdoing.
+Horizon as a project was already on the back foot, reputationally and financially, with Post Office now the *de-facto* responsible party. Rather than investigating their new IT system for financial errors, Post Office robustly turned the problem back on the Sub Postmasters; requiring them to make-good the shortfalls without opportunity for dispute (Hamilton v Post Office, judgement, 2021)[^2].
+
+If SPMs didn't repay the shortfalls, Post Office auditors brought prosecutions against them. They were wrongfully pressured (Fraser J, Judgment No 3)[^3] into admitting charges of mismanagement, under the threat that they would otherwise risk prison if they denied wrongdoing.
 
 Many lost their homes due to the incurred debt. Others went to prison. Some died.
 
 # What can you do about this?
 
-Help share this knowledge in some small way. Help us play our part in improving the collective knowledge of society, to prevent a similar disaster happening again.
+Help share this knowledge in some small way. Play your part in improving the collective knowledge of society, to prevent a similar disaster happening again.
 
 Collective knowledge works. It's how society is beginning to scrutinise institutions on climate action. Societal knowledge leads to well-informed scrutiny.
 
-Read on, and I'll describe 5 failures. If there's technical detail, I'll separate it out so you can skip over those bits if they're not of interest. The rest is a human story.
+Read on, and I'll describe 5 failures. I'll separate out the technical detail so you can skip over those bits if they're not of interest. The rest is a human story.
 
 # Failure #1: Transparency and disclosure
 
-When SPMs called the Horizon support helpline to report errors, the Fujitsu staff recorded them into a "Known Error Log". This would have been useful as evidence in Court. But these errors were not widely disclosed by Post Office during any of its legal proceedings against SPMs. They maintained that Horizon was robust, without providing evidence.
+When SPMs called the Horizon support helpline to report errors, Fujitsu staff recorded them into a "Known Error Log". This would have been useful as evidence in Court. But these errors were not widely disclosed by Post Office during any of its legal proceedings against SPMs. They maintained that Horizon was robust, without providing evidence.
 
-The next failure was during counter claims by SPMs against Post Office. The Government and Members of Parliament instigated independent inquiries; but Post Office aggressively redacted evidence. Prosecutions continued.
+The next failure was during counter claims by SPMs against Post Office. The Government and Members of Parliament instigated independent inquiries; but Post Office aggressively withheld evidence[^9] in an attempt to protect from reputational damage[reference trusted brand]. Prosecutions continued.
 
-In all these legal cases, transparency would have enabled the focus to be put back onto Horizon's bugs, and innocent people kept out of prison.
+In all these legal cases transparency would have enabled the focus to be put back onto Horizon's bugs, and innocent people kept out of prison.
 
 # Failure #2: Acquisition due-diligence
 
@@ -72,51 +72,63 @@ There's an additional irony here, post-acquisition, when Horizon continued as an
 
 Software DevOps is an industry term that includes how software is rolled out to the users, and how it's supported and maintained by technical staff.
 
-An important principle of DevOps is that technical staff should never have unrestricted access to the data in a live system. But in Horizon, it was routine [cite] for support staff to "fix" data errors in SPM's accounts, without any proper controls, and without proper logs of what they'd changed.
+An important principle of DevOps is that technical staff should never have unrestricted access to the data in a live system. But in Horizon it was routine[^3] for support staff to "fix" data errors in SPM's accounts, without any proper controls. And worse, without proper logs of what they'd changed.
 
-Good DevOps practices are also closely aligned with how a system is tested. There was very little evidence in the Court expert witness statements of anything that a modern software developer would consider as "good". For the few system errors that Post Office reported, there was never mention of how the fixes were formally tested.
+Good DevOps practices are also closely aligned with how a system is tested. There was very little evidence in the Court expert witness statements of anything that a modern software developer would consider "good". For the minimal system errors that Post Office reported, there was no focus on how the fixes were formally tested.
 
-Another DevOps principle is "observability and monitoring" of a system. This means it should constantly and thoroughly collect data about how well it's functioning. The technical term is "logging" - it's the system keeping a log of everything that happens, so that any problems or errors can be accurately investigated. Court proceedings have subsequently showed there wasn't enough logging for fault to be attributed correctly.
+Another principle is "observability and monitoring" of a system: it should continuously and thoroughly log data about how well it's functioning. Court proceedings have subsequently showed there wasn't enough logging for fault to be attributed correctly.
 
-### Technical details
+### Technical thoughts
 
-- It's dangerous, directly editing data in a production system. Especially the methods that Horizon staff were using, which was to directly manipulate [reference] the data using SQL CLI commands; bypassing most of the checks and balances that written into the software.
+- It's dangerous, directly editing data in a production system. Especially the methods that Horizon staff were using, which was to manipulate [reference] the data using SQL CLI commands; bypassing many of the checks and balances that written into the software. Privileged User Access by support staff was widespread used as a regular method of solving application issues, and without logging of what actions were taken. There was a Transaction Correction Tool script but its usage was not logged.[^6]
 
 - Errors in data are almost always due to a software problem further upstream. By simply fixing the data, it takes the focus away from helping to identify the root-cause. Even worse, it can destroy key information that would help the bug to be properly investigated.
 
-- Testing is vital. Horizon was in development for over a decade, including adding new features and fixing bugs. Whenever part of a system is modified, there needs to be "regression testing" of the parts of the system that sit around that. This might be a combination of manual test plans; synthetic test data; automated test scripts... None of this was mentioned in the Court proceedings that I've seen. I suspect testing was inadequate. Systems cannot be claimed to be robust until they've been tested. The presumption should always be that a system is _not_ robust [reference], unless it can be proven otherwise.
+- Testing is vital. Horizon was in development for over a decade, with many changes to add new features and fix bugs. Whenever part of a system is modified, there needs to be "regression testing" of the parts of the system that sit around that. This might be a combination of manual test plans; synthetic test data; automated test scripts... None of this was mentioned in the Court proceedings that I've seen.
 
-# Failure #4: Systems Integration
+# Failure #4: Software and Integration
 
-The name "Horizon" is an umbrella covering many different individual systems, all developed by different teams. Bringing systems together in harmony is known as "Integration".
+The name "Horizon" is an umbrella covering many different individual software systems, all developed by different teams. Bringing systems together in harmony is called "Integration".
 
-Much of the Court evidence given by the Post Office expert witness was focused on the robustness and reliability of the individual systems within Horizon. The expert witness didn't offer expertise on the challenges (and possibility of significant errors) arising from how the systems are integrated.
+Much of the Court evidence given by the Post Office expert witness[^8] was on the robustness and reliability of just the _database_ system within Horizon. And while his technical description of database systems is true, I'd suggest it's not useful. It focused attention away from where most software bugs occur: in the software. Not the database.
 
-### Technical details
+The expert witness didn't offer expertise on the challenges (and scope for error) arising from how the systems are integrated, or from the software algorithms that sit above the database. 
 
-- The expert witness talked at length about the inherent safety of double-entry bookkeeping in accountancy, and how this forms the basis of Horizon's claimed robustness. He went into great detail explaining how relational databases work, including referential integrity and transaction blocks, and that this is proof of robustness. And while his technical description of database systems is true, I'd suggest it's not useful. It focused the inquiry's attention away from where most software bugs occur: in the software. Not the database. Most software developers know this, so it's upsetting that an expert witness didn't express it.
+### Technical thoughts
+
+- The expert witness talked at length about the inherent safety of double-entry bookkeeping in accountancy, and how this forms the basis of Horizon's claimed robustness. He went into great detail explaining how relational databases work, including referential integrity and transaction blocks, and that this is proof of robustness.
+
+- One of the proven errors in the pivotal Bates v Post Office was a bug when the same SPM user logged on to two computer terminals at the same time. This is a classic "integration testing" failure. The software was never built to cope with the same user logging on twice, because (in theory) it wasn't possible. The complexity of the two systems together - the computer terminal and the Horizon system - caused the error.
 
 # Failure #5: Legal
 
 The early prosecutions of SPMs relied on a (then legally valid) assumption that:
 
-> a computer operated correctly unless there is explicit evidence to the contrary "Law Commission Presumption, 1997" [reference]
+> computer[s] operate correctly unless there is explicit evidence to the contrary.
+*Law Commission Presumption, 1997*
 
 Put another way, the SPMs had no defence because Horizon was legally presumed to be functioning correctly. SPMs could claim there was a bug, but without any good error logging or relevant testing (see Failure #3) there was literally no evidence to the contrary. SPMs were found guilty and prosecuted.
 
-The legal system's view of computer systems was simplistic, and not sufficiently aligned with the reality of large-scale software systems.
+The legal system's presumption of computer systems was simplistic, and not aligned with the reality of large-scale software systems. Thankfully, this presumption has now been recognised by a Law Commission article[^4] as not "reflect[ing] the reality of general software-based system behaviour."
 
-Thankfully - if that's possible to say - this presumption has now been recognised by a Law Commission article as not "reflect[ing] the reality of general software-based system behaviour" [reference]
+Citing this article, Parliamentary Justice Committee evidence[^5] has recommended mandatory training for all lawyers on the complexities of software development.
 
-In other words, the legal profession has since realised that software systems are too complex to simply assume they function correctly, and that evidence is always needed. The Horizon failure was a central theme of the Law Commission's article.
+Much of that improved legal thinking comes from a landmark legal case; one where SPMs received justice for the first time. This is "Bates v Post Office"[^3] presided over by Justice Fraser, examining 29 bugs[^7] that had been involved in falsely prosecuting SPMs. Justice Fraser's analysis is highly astute. One of his findings states it was extremely difficult for the experts to make categorical negative statements of the form "X or Y never happened"; and even where there is some evidence then it would be too complex to disentangle. Perhaps his most damning assessment is:
 
-A lot of that improved legal thinking is down to a landmark case in the Horizon story; one where the tide finally turned and SPMs received justice for the first time. This is the case of "Bates v Post Office" which was presided over by Justice Fraser. His highly astute analysis helped to break through the limited and confusing evidence of prior cases. I recommend you read a few pages, as it's the only uplifting part of the Horizon story.
+> This approach by the Post Office has amounted, in reality, to bare assertions and denials that ignore what has actually occurred, at least so far as the witnesses called before me in the Horizon Issues trial are concerned. It amounts to the 21st century equivalent of maintaining that the earth is flat.
+*Bates v Post Office, judgment No 6, paragraph 929*[^6]
 
-### Technical
+I recommend you read a few pages of Justice Fraser's findings. It's a rare uplifting part of the Horizon story.
+
+### Technical thoughts
+
+- It's almost incomprehensible that the expert witness for the Post Office portrayed software as inherently robust. *Any* software professional will tell you this is never the case. You need to write test cases to test the code for bugs. Anything not covered by a well-defined test case cannot be claimed as bug-free or robust.
 
 - Modern software development places huge emphasis on testing and monitoring. When errors occur, the system should have logged enough data that the software team can _reproduce_ the bug by testing for it in a controlled environment. Then they modify the software to fix it, and then re-test to validate the bug goes away. Horizon didn't follow this.
 
 - We think of making software "observable and monitorable" because, as software professionals, it makes our lives easier. We can catch problems early; and we can find bugs more easily. But since reading about Horizon, I realise that if a software vendor ends up in Court, they need to have evidence (e.g. system logs) to prove culpability.
+
+- There was insufficient system logging to determine cause of errors, let alone to determine it was the fault of SPMs. Technical support staff created standard code scripts and tooling for fixing errors that happened often, but even these tools didn't log that they had been used.
 
 # Ivory Towers
 
@@ -182,52 +194,16 @@ To round this off, I thought I'd try illustrating the sheer size of the Horizon 
     commit id: "SPMs bring legal action (2017)"
 {% endmermaid %}
 
-Notes:
+# Further reading
 
-May 1996 awarded to ICL
-1998 Fujitsu became sole owner (increasing its existing shareholding)
-May 1999 DSS withdrew, leaving just Post Office
-1999-2001 wide scale rollout
+Judiciary reports from Bates v Post Office: https://www.judiciary.uk/judgments/bates-others-v-post-office/
 
-1999-2015 4,000 accusations, 700 convictions and 236 prison
-
-ICL brand replaced June 2001: https://www.theregister.com/2001/06/21/icl_brand_put/
-
-Second Sight's first interim report: https://www.jfsa.org.uk/uploads/5/4/3/1/54312921/pol_interim_report_signed.pdf
-
-Parliament report recommending restructing of Horizon project, 1999: https://publications.parliament.uk/pa/cm199900/cmselect/cmtrdind/50/5004.htm
-
-Second Sight not given access to evidence: https://committees.parliament.uk/writtenevidence/6580/html/
-
-- Select Committee evidence on Second Sight not being allowed to gather evidence
-- "plea due to computer not working will not be accepted (2007)"
-
-Bates v Post Office, Fraser J, judgment no 3: https://en.wikipedia.org/wiki/Bates_v_Post_Office_Ltd_(No_3)
-
-https://www.judiciary.uk/wp-content/uploads/2022/07/Hamilton-Others-v-Post-Office-judgment-230421.pdf
-
-- Possible to directly manipulate the database by executing SQL commands directy from a command line interface.
-- Extremely difficult for the experts to make categorical negative statements of the form "X or Y never happened" due to the complexity of tooling used for remediating data issues; and either there will be no evidence or it will be too complex to disentangle:
-- Privileged User Access by support staff was widespread used as a regular method of solving application issues, and without logging of what actions were taken. There was a Transaction Correction Tool script but its usage was not logged.
-  https://www.judiciary.uk/wp-content/uploads/2019/12/bates-v-post-office-judgment.pdf
-
-https://www.jfsa.org.uk/uploads/5/4/3/1/54312921/an_introduction_to_the_ci_and_hi_judgments.pdf
-
-Horizon architecture description:
-https://www.judiciary.uk/wp-content/uploads/2022/07/bates-v-post-office-appendix-1-1.pdf
-
-Law Commission article on the presumption of reliability of computer systems
-
-- Dr Worden over emphasising RDBMS transactions:
-  https://www.judiciary.uk/wp-content/uploads/2022/07/bates-v-post-office-appendix-1-1.pdf
-
-Judgment No 6 Bates:
-https://www.judiciary.uk/wp-content/uploads/2019/12/bates-v-post-office-judgment.pdf
-
-Judgment No 6 Bates Appendix 2 Summary of Bugs, Errors, Defects:
-https://www.judiciary.uk/wp-content/uploads/2022/07/bates-v-post-office-appendix-2-1.pdf
-
-https://www.judiciary.uk/judgments/bates-others-v-post-office/
-
-Limitations of the LC Presumption (computers are correct unless to the contrary)
-https://journals.sas.ac.uk/deeslr/article/view/5143/5027
+[^1]: https://publications.parliament.uk/pa/cm199900/cmselect/cmtrdind/50/5004.htm (UK Parliamentary Select Committee report, 1999)
+[^2]: https://www.judiciary.uk/wp-content/uploads/2022/07/Hamilton-Others-v-Post-Office-judgment-230421.pdf (Hamilton v Post Office, judgment, 2021)
+[^3]: https://www.bailii.org/ew/cases/EWHC/QB/2019/606.pdf (Bates v Post Office, judgment No 3 Common Issues, 2019)
+[^4]: https://journals.sas.ac.uk/deeslr/article/view/5143/5027 (Law Commission article advising changes to presumption on reliability of computer systems, 2020)
+[^5]: https://committees.parliament.uk/writtenevidence/7839/pdf/ (Parliamentary Justice Commission evidence recommending mandatory software awareness training in the justice system)
+[^6]: https://www.judiciary.uk/wp-content/uploads/2019/12/bates-v-post-office-judgment.pdf (Bates v Post Office, judgment No 6 Horizon Issues, 2019)
+[^7]: https://www.judiciary.uk/wp-content/uploads/2022/07/bates-v-post-office-appendix-2-1.pdf (Bates v Post Office, judgment No 6 Summary of bugs, 2019)
+[^8]: https://www.judiciary.uk/wp-content/uploads/2022/07/bates-v-post-office-appendix-1-1.pdf (Bates v Post Office, judgment No 6 Technical appendix, 2019)
+[^9]: https://committees.parliament.uk/writtenevidence/6580/html/ (Parliamentary Select Committee evidence, 2020)
