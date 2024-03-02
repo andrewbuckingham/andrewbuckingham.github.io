@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Collections, Classes, Clocks | Curiouser²</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+  
+  <meta name="description" content="Here’s a talk I did at a local tech meet-up event. This blog post is, unashamedly, NET 8 for the Nerds. I was meant to be speaking about the new Microsoft .NET 8 release, but decided to be rebellious">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Collections, Classes, Clocks">
+<meta property="og:url" content="https://andrewbuckingham.github.io/2024/03/02/Collections-Classes-Clocks/index.html">
+<meta property="og:site_name" content="Curiouser²">
+<meta property="og:description" content="Here’s a talk I did at a local tech meet-up event. This blog post is, unashamedly, NET 8 for the Nerds. I was meant to be speaking about the new Microsoft .NET 8 release, but decided to be rebellious">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-03-02T16:26:23.000Z">
+<meta property="article:modified_time" content="2024-03-02T19:26:47.694Z">
+<meta property="article:author" content="Andrew Buckingham">
+<meta property="article:tag" content="dotnet">
+<meta property="article:tag" content="c#">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+  
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-12TTYHVW2Q"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+  
+      gtag('config', 'G-12TTYHVW2Q');
+    </script>
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Curiouser²" type="application/atom+xml">
+</head>
+
+<body>
+  <div id="wrapper">
+    <header id="header">
+  <h1 id="title">
+    <a href="/">Curiouser²</a>
+  </h1>
+  <nav>
+    
+    
+      
+      <a class="nav-link" href="/">Home</a>
+    
+      
+        <span class="nav-spacer">×</span>
+      
+      <a class="nav-link" href="/archives">Archives</a>
+    
+      
+        <span class="nav-spacer">×</span>
+      
+      <a class="nav-link" href="/2023/05/20/about/me/">About</a>
+    
+    
+    
+      <span class="nav-spacer">×</span>
+      <a class="nav-link" rel="me noopener" target="_blank" href="https://mathstodon.xyz/@andrewb">Mastodon</a>
+    
+  </nav>
+</header>
+
+    <div id="content">
+      <article id="post-Collections-Classes-Clocks" class="article article-type-post" itemprop="blogPost" itemscope>
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 class="article-title" itemprop="headline name">
+      Collections, Classes, Clocks
+    </h2>
+  
+
+
+        <div class="article-meta">
+          <time class="article-date" datetime="2024-03-02T16:26:23.000Z" itemprop="datePublished">March 2, 2024, 4:26 PM</time>
+
+          
+            × <span class="article-word-count">2.7k words</span>
+            
+            × <span class="article-time-to-read">17 minutes</span>
+            
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+        <p>Here’s a talk I did at a local tech meet-up event. This blog post is, unashamedly, <em>NET 8 for the Nerds</em>.</p>
+<p>I was <em>meant</em> to be speaking about the new Microsoft .NET 8 release, but decided to be rebellious and talk lots about Python instead. Partly, my excuse was that tech meet-ups are more fun if there are different technologies.</p>
+<p>But, struggling for a better excuse, I decided to talk about new language features that are moving C# closer towards the convenience of Python. Read on to be unconvinced.</p>
+<h1 id="0-Tech-we’ll-be-using"><a href="#0-Tech-we’ll-be-using" class="headerlink" title="0. Tech we’ll be using"></a>0. Tech we’ll be using</h1><ul>
+<li><em><strong>.NET 8 and C# 12:</strong></em> new language and runtime features</li>
+<li><em><strong>Python:</strong></em> hugely convenient, can C# learn from it?</li>
+<li><del><em><strong>Jupyter Notebooks:</strong></em> markdown and code</del> OK the talk used Jupyter but I can’t do that in a blog post</li>
+</ul>
+<p>I’ve grouped the talk into 3 parts: Collections, Classes, Clocks.</p>
+<h1 id="1-Collections"><a href="#1-Collections" class="headerlink" title="1. Collections"></a>1. Collections</h1><p>Collections are the mainstay of most applications. After all, what’s ever been achieved by processing a single datapoint on its own?</p>
+<p>Everyone has their favourite. <code>IEnumerable&lt;T&gt;</code> or <code>IList&lt;T&gt;</code> or just plain arrays. They’re a bit faffy to initialise though, aren’t they? It all depends on the method you’re calling, and what type that expects:</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ProcessData(<span class="keyword">new</span> <span class="built_in">int</span>[] &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;); <span class="comment">// If you&#x27;re lucky.</span></span><br><span class="line">ProcessData(<span class="keyword">new</span> <span class="built_in">int</span>[] &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;.ToList()); <span class="comment">// If you&#x27;re unlucky.</span></span><br><span class="line">ProcessData(Enumerable.Empty&lt;<span class="built_in">int</span>&gt;()); <span class="comment">// Or even if you even just want to do nothing.</span></span><br><span class="line">ProcessData(Array.Empty&lt;<span class="built_in">int</span>&gt;()); <span class="comment">// ...unless it needs an Array, in which case it&#x27;s this.</span></span><br></pre></td></tr></table></figure>
+
+<p>This is even more of a pain if you change the method signature to a more derived type. Even your empty array calls don’t compile any more!</p>
+<h2 id="Before-we-start-let’s-talk-about-Python"><a href="#Before-we-start-let’s-talk-about-Python" class="headerlink" title="Before we start, let’s talk about Python!"></a>Before we start, let’s talk about Python!</h2><p>Python rightly has a reputation for being quick to develop code. The syntax is really simple and doesn’t have any of that unnecessary faff:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ProcessData([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+
+<h2 id="Can-we-get-close-to-Python-in-NET-8-with-C-12"><a href="#Can-we-get-close-to-Python-in-NET-8-with-C-12" class="headerlink" title="Can we get close to Python in .NET 8 with C# 12?"></a>Can we get close to Python in .NET 8 with C# 12?</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Let&#x27;s try...</span></span><br><span class="line">ProcessData([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Or even...</span></span><br><span class="line"><span class="built_in">int</span>[] others = [<span class="number">9</span>,<span class="number">8</span>];</span><br><span class="line">ProcessData([<span class="number">1</span>, <span class="number">2</span>, ..others, <span class="number">3</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>So yes we can! If you compare the Python example to that first C# 12 block above, you’ll see they’re literally identical.</p>
+<p><em>(in fact, when I gave this talk live, I used a Jupyter notebook and ran that “Python” code sample inside a C# .NET interpreter block, because the syntax was identical. Except I hid a semicolon on the next line. I know right? What a trickster!)</em></p>
+<h2 id="So-what’s-going-on"><a href="#So-what’s-going-on" class="headerlink" title="So what’s going on?"></a>So what’s going on?</h2><p>A new language feature: collection expressions<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-12.0/collection-expressions">^1</a>. Lots of magic under the hood. Some neat features:</p>
+<ul>
+<li>If the target type changes (e.g. a method used to take IEnumerable but now takes Array) the compiler finds the most appropriate initialiser.</li>
+<li>All sorts of performance optimisations internally; better than most people would hand-roll. Example<a target="_blank" rel="noopener" href="https://sharplab.io/#v2:CYLg1APgAgTAjAWAFBQAwAIpwCwG5lqZwB0AMgJYB2AjvkgQMyYzoDKA9gLYCmAwgDYBDAM7DkAb2TppmJlGzoAsoKqLuAFwAW7YAAoAlFJmSkMs+gAKAJ3YBjbqIAig9YIA8VdQD5dAbQC6+nRmAL5G5ujh6AAOVuQAbi7cmArWdg7Czq5uACo+WAwelN7owC6ChqbGUWFIIUA=">^2</a></li>
+</ul>
+<h1 id="2-Classes"><a href="#2-Classes" class="headerlink" title="2. Classes"></a>2. Classes</h1><p>Let’s create a class that processes some data and returns a calculated result.</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> MathNet.Numerics.Statistics;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Stats</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Stats</span>(<span class="params">IEnumerable&lt;<span class="built_in">double</span>&gt; data</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        _data = data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">readonly</span> IEnumerable&lt;<span class="built_in">double</span>&gt; _data;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> (<span class="built_in">double</span> Average, <span class="built_in">double</span> Deviation) Calculate()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> (_data.Average(), _data.StandardDeviation());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = <span class="keyword">new</span> Stats([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]).Calculate();</span><br><span class="line"></span><br><span class="line">Console.WriteLine(<span class="string">$&quot;<span class="subst">&#123;result.Average&#125;</span>, <span class="subst">&#123;result.Deviation&#125;</span>&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>You’ll see that this takes some data, does two calculations on it (average and stdev) and returns the result.</p>
+<p><em>(NB I have taken liberties here and enumerated the same <code>IEnumerable</code> more than once. This is usually a Bad Thing (TM) and I’ve done it for artistic license. Don’t do it in your production systems!)</em></p>
+<h2 id="Can-we-learn-much-from-Python"><a href="#Can-we-learn-much-from-Python" class="headerlink" title="Can we learn much from Python?"></a>Can we learn much from Python?</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> statistics</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Stats</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, data</span>):</span><br><span class="line">        self._data = data</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">calculate</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> (statistics.mean(self._data), statistics.stdev(self._data))</span><br><span class="line"></span><br><span class="line">avg, dev = Stats([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]).calculate()</span><br></pre></td></tr></table></figure>
+
+<p>So yes, Python has simplified this in a few ways:</p>
+<ul>
+<li>Eliminated the explicit declaration of the private readonly variable for <code>_data</code></li>
+<li>Enables de-structuring the result directly into two variables</li>
+</ul>
+<h2 id="Let’s-see-what-we-can-do-with-C-12-and-NET-8"><a href="#Let’s-see-what-we-can-do-with-C-12-and-NET-8" class="headerlink" title="Let’s see what we can do with C# 12 and .NET 8"></a>Let’s see what we can do with C# 12 and .NET 8</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> MathNet.Numerics.Statistics;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Stats</span>(<span class="params">IEnumerable&lt;<span class="built_in">double</span>&gt; data</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> (<span class="built_in">double</span> Average, <span class="built_in">double</span> Deviation) Calculate() =&gt; (data.Average(), data.StandardDeviation());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> (avg, dev) = <span class="keyword">new</span> Stats([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]).Calculate();</span><br><span class="line"></span><br><span class="line">Console.WriteLine(<span class="string">$&quot;<span class="subst">&#123;avg&#125;</span>, <span class="subst">&#123;dev&#125;</span>&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>Hang on. That’s <em>shorter</em> than the Python equivalent!</p>
+<h2 id="What’s-going-on"><a href="#What’s-going-on" class="headerlink" title="What’s going on?"></a>What’s going on?</h2><p>Some magic syntax coming from the new C# 12 specification. We used a few recent-ish features from prior C# specifications too:</p>
+<ul>
+<li>C# 12: Primary Constructors<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-12.0/primary-constructors">^3</a>. A bit like we see in the recent <code>record</code> class definitions we gained in C# 10. (although record classes expose the field publicly, whereas classes with primary constructors don’t.)</li>
+<li>C# 10: Destructuring of objects into variables (since C# 7 with some restrictions)</li>
+<li>C# 6: Expression-bodied members</li>
+</ul>
+<h1 id="3-Clocks"><a href="#3-Clocks" class="headerlink" title="3. Clocks"></a>3. Clocks</h1><p>To be fair I’ve dropped the Python rebellion pretence now, but I do want to talk about the most <strong>significant</strong> new feature to appear in .NET for many a long year.</p>
+<p>Let’s talk time.</p>
+<h2 id="So-you’re-not-afraid-of-working-with-time"><a href="#So-you’re-not-afraid-of-working-with-time" class="headerlink" title="So you’re not afraid of working with time?"></a>So you’re not afraid of working with time?</h2><p>Time is one of the most difficult concepts in programming. Need persuading? If you live somewhere with a summertime timezone offset, just start with that. <strong>Can you think of any unsafe assumptions people typically make?</strong></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        some falsehoods about time
+    </div>
+    <div class='spoiler-content'>
+        <ul>
+<li>There are always 24 hours in a day.</li>
+<li>February is always 28 days long.</li>
+<li>Any 24-hour period will always begin and end in the same day (or week, or month).</li>
+<li>A week always begins and ends in the same month.</li>
+<li>A week (or a month) always begins and ends in the same year.</li>
+<li>The machine that a program runs on will always be in the <code>GMT</code> time zone.</li>
+<li>Ok, that’s not true. But at least the time zone in which a program has to run will never change.</li>
+<li>Well, surely there will never be a change to the time zone in which a program hast to run in production.</li>
+<li>The system clock will always be set to the correct local time.</li>
+<li>The system clock will always be set to a time that is not wildly different from the correct local time.</li>
+<li>If the system clock is incorrect, it will at least always be off by a consistent number of seconds.</li>
+<li>The server clock and the client clock will always be set to the same time.</li>
+<li>The server clock and the client clock will always be set to around the same time.</li>
+<li>Ok, but the time on the server clock and time on the client clock would never be different by a matter of decades.</li>
+<li>If the server clock and the client clock are not in synch, they will at least always be out of synch by a consistent number of seconds.</li>
+<li>The server clock and the client clock will use the same time zone.</li>
+<li>The system clock will never be set to a time that is in the distant past or the far future.</li>
+<li>Time has no beginning and no end.</li>
+<li>One minute on the system clock has exactly the same duration as one minute on any other clock</li>
+<li>Ok, but the duration of one minute on the system clock will be pretty close to the duration of one minute on most other clocks.</li>
+<li>Fine, but the duration of one minute on the system clock would never be more than an hour.</li>
+<li>The smallest unit of time is one second.</li>
+<li>Ok, one millisecond.</li>
+<li>It will never be necessary to set the system time to any value other than the correct local time.</li>
+<li>Ok, testing might require setting the system time to a value other than the correct local time but it will never be necessary to do so in production.</li>
+<li>Time stamps will always be specified in a commonly-understood format like <code>1339972628</code> or <code>133997262837</code>.</li>
+<li>Time stamps will always be specified in the same format.</li>
+<li>Time stamps will always have the same level of precision.</li>
+<li>A time stamp of sufficient precision can safely be considered unique.</li>
+<li>A timestamp represents the time that an event actually occurred.</li>
+<li>Human-readable dates can be specified in universally understood formats such as <code>05/07/11</code>.</li>
+<li>The offsets between two time zones will remain constant.</li>
+<li>OK, historical oddities aside, the offsets between two time zones won’t change in the future.</li>
+<li>Changes in the offsets between time zones will occur with plenty of advance notice.</li>
+<li>Daylight saving time happens at the same time every year.</li>
+<li>Daylight saving time happens at the same time in every time zone.</li>
+<li>Daylight saving time always adjusts by an hour.</li>
+<li>Months have either 28, 29, 30, or 31 days.</li>
+<li>The day of the month always advances contiguously from <code>N</code> to either <code>N+1</code> or <code>1</code>, with no discontinuities.</li>
+<li>There is only one calendar system in use at one time.</li>
+<li>There is a leap year every year divisible by 4.</li>
+<li>Non leap years will never contain a leap day.</li>
+<li>It will be easy to calculate the duration of x number of hours and minutes from a particular point in time.</li>
+<li>The same month has the same number of days in it everywhere!</li>
+<li>Unix time is completely ignorant about anything except seconds.</li>
+<li>Unix time is the number of seconds since Jan 1st 1970.</li>
+<li>The day before Saturday is always Friday.</li>
+<li>Contiguous timezones are no more than an hour apart. (aka we don’t need to test what happens to the avionics when you fly over the International Date Line)</li>
+<li>Two timezones that differ will differ by an integer number of half hours.</li>
+<li>Okay, quarter hours.</li>
+<li>Okay, seconds, but it will be a consistent difference if we ignore <code>DST</code>.</li>
+<li>If you create two date objects right beside each other, they’ll represent the same time. (a fantastic Heisenbug generator)</li>
+<li>You can wait for the clock to reach exactly <code>HH:MM:SS</code> by sampling once a second.</li>
+<li>If a process runs for <code>n</code> seconds and then terminates, approximately <code>n</code> seconds will have elapsed on the system clock at the time of termination.</li>
+<li>Weeks start on Monday.</li>
+<li>Days begin in the morning.</li>
+<li>Holidays span an integer number of whole days.</li>
+<li>The weekend consists of Saturday and Sunday.</li>
+<li>It’s possible to establish a total ordering on timestamps that is useful outside your system.</li>
+<li>The local time offset (from <code>UTC</code>) will not change during office hours.</li>
+<li><code>Thread.sleep(1000)</code> sleeps for 1000 milliseconds.</li>
+<li><code>Thread.sleep(1000)</code> sleeps for <code>&gt;=</code> 1000 milliseconds.</li>
+<li>There are 60 seconds in every minute.</li>
+<li>Timestamps always advance monotonically.</li>
+<li><code>GMT</code> and <code>UTC</code> are the same timezone.</li>
+<li>Britain uses <code>GMT</code>.</li>
+<li>Time always goes forwards.</li>
+<li>The difference between the current time and one week from the current time is always <code>7 * 86400</code> seconds.</li>
+<li>The difference between two timestamps is an accurate measure of the time that elapsed between them.</li>
+<li><code>24:12:34</code> is a invalid time.</li>
+<li>Every integer is a theoretical possible year.</li>
+<li>If you display a datetime, the displayed time has the same second part as the stored time,</li>
+<li>Or the same year,</li>
+<li>But at least the numerical difference between the displayed and stored year will be less than 2.</li>
+<li>If you have a date in a correct <code>YYYY-MM-DD</code> format, the year consists of four characters.</li>
+<li>If you merge two dates, by taking the month from the first and the day&#x2F;year from the second, you get a valid date.</li>
+<li>But it will work, if both years are leap years</li>
+<li>If you take a w3c published algorithm for adding durations to dates, it will work in all cases.</li>
+<li>The standard library supports negative years and years above 10000.</li>
+<li>Time zones always differ by a whole hour.</li>
+<li>If you convert a timestamp with millisecond precision to a date time with second precision, you can safely ignore the millisecond fractions.</li>
+<li>But you can ignore the millisecond fraction, if it is less than 0.5.</li>
+<li>Two-digit years should be somewhere in the range 1900-2099.</li>
+<li>If you parse a date time, you can read the numbers character for character, without needing to backtrack.</li>
+<li>But if you print a date time, you can write the numbers character for character, without needing to backtrack.</li>
+<li>You will never have to parse a format like <code>---12Z</code> or <code>P12Y34M56DT78H90M12.345S</code>.</li>
+<li>There are only 24 time zones.</li>
+<li>Time zones are always whole hours away from UTC.</li>
+<li>Daylight Saving Time (DST) starts&#x2F;ends on the same date everywhere.</li>
+<li>DST is always an advancement by 1 hour.</li>
+<li>Reading the client’s clock and comparing to UTC is a good way to determine their timezone.</li>
+<li>The software stack will&#x2F;won’t try to automatically adjust for timezone&#x2F;DST.</li>
+<li>My software is only used internally&#x2F;locally, so I don’t have to worry about timezones.</li>
+<li>My software stack will handle it without me needing to do anything special.</li>
+<li>I can easily maintain a timezone list myself.</li>
+<li>All measurements of time on a given clock will occur within the same frame of reference.</li>
+<li>The fact that a date-based function works now means it will work on any date.</li>
+<li>Years have 365 or 366 days.</li>
+<li>Each calendar date is followed by the next in sequence, without skipping.</li>
+<li>A given date and&#x2F;or time unambiguously identifies a unique moment.</li>
+<li>Leap years occur every 4 years.</li>
+<li>You can determine the time zone from the state&#x2F;province.</li>
+<li>You can determine the time zone from the city&#x2F;town.</li>
+<li>Time passes at the same speed on top of a mountain and at the bottom of a valley.</li>
+<li>One hour is as long as the next in all time systems.</li>
+<li>You can calculate when leap seconds will be added.</li>
+<li>The precision of the data type returned by a <code>getCurrentTime()</code> function is the same as the precision of that function.</li>
+<li>Two subsequent calls to a <code>getCurrentTime()</code> function will return distinct results.</li>
+<li>The second of two subsequent calls to a <code>getCurrentTime()</code> function will return a larger result.</li>
+<li>The software will never run on a space ship that is orbiting a black hole.</li>
+<li>Devices will be set to the local timezone</li>
+<li>Users prefer to use the local timezone</li>
+</ul>
+<p>reference:[^4]</p>
+
+    </div>
+</div>
+
+<blockquote>
+<p><em><strong>TL;DR: If you’re not Unit Testing your time calcs, your code isn’t production-ready.</strong></em></p>
+</blockquote>
+<p>What happens when we try to Unit Test our time calculations, usually? Let’s create a class that does some basic time calcs.</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">UntestableTimeCode</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">readonly</span> DateTimeOffset _createdOn = DateTimeOffset.Now.Date;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">bool</span> <span class="title">IsItTomorrowYet</span>()</span> =&gt; DateTimeOffset.Now.Date &gt; _createdOn.Date;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Completely fictional obviously, but this code would store today’s date when you initialise it, and then you could repeatedly ask it “Is it tomorrow yet”. Until it is.</p>
+<p>The clue’s in the name here: it’s not really testable. But if we really <em>really</em> had to test that class, could we do it in a <del>hacky</del> creative way?</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Xunit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">TimeTest1</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">Fact</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">TestIf_IsItTomorrowYet_ReturnsTrueTomorrow</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">var</span> untestable = <span class="keyword">new</span> UntestableTimeCode();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Umm...?</span></span><br><span class="line">        <span class="keyword">await</span> Task.Delay(TimeSpan.FromHours(<span class="number">24</span>));</span><br><span class="line"></span><br><span class="line">        Assert.True(untestable.IsItTomorrowYet());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>…yes. But you can see the problem here. Your unit test would take <strong>24 hours</strong> to run. FAIL.</p>
+<h2 id="NET-8-secret-sauce"><a href="#NET-8-secret-sauce" class="headerlink" title=".NET 8 secret sauce"></a>.NET 8 secret sauce</h2><p>So. We need some way to modify the system clock. Or rather, de-couple our code from the system clock, and use an abstraction that we can control in a test.</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">TestableTimeCode</span>(<span class="params">TimeProvider timeProvider</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">readonly</span> DateTimeOffset _createdOn = timeProvider.GetUtcNow().Date;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">bool</span> <span class="title">IsItTomorrowYet</span>()</span> =&gt; timeProvider.GetUtcNow().Date &gt; _createdOn.Date;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// In normal use, we pass the current System time provider into the constructor:</span></span><br><span class="line"><span class="keyword">var</span> myTimeCode = <span class="keyword">new</span> TestableTimeCode(TimeProvider.System);</span><br></pre></td></tr></table></figure>
+
+<p>OK, so we have now de-coupled from the System clock by adding a dependency. How does this make Unit Tests possible?</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Microsoft.Extensions.Time.Testing;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">TimeTest2</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">Fact</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">TestIf_IsItTomorrowYet_ReturnsTrueTomorrow</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">var</span> fakeTime = <span class="keyword">new</span> FakeTimeProvider(startDateTime: DateTimeOffset.UtcNow.Date);</span><br><span class="line">        <span class="keyword">var</span> untestable = <span class="keyword">new</span> TestableTimeCode(fakeTime);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//  await Task.Delay(TimeSpan.FromHours(24)); --not any more!</span></span><br><span class="line">        fakeTime.Advance(TimeSpan.FromHours(<span class="number">24</span>));</span><br><span class="line"></span><br><span class="line">        Assert.True(untestable.IsItTomorrowYet());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Amazing! We can artificially advance the system clock to suit our whim. </p>
+<h2 id="TimeProvider-is-our-new-best-friend"><a href="#TimeProvider-is-our-new-best-friend" class="headerlink" title="TimeProvider is our new best friend!"></a>TimeProvider is our new best friend!</h2><blockquote>
+<p><em><strong>Remember, take a TimeProvider dependency into all your time-based code.</strong></em></p>
+</blockquote>
+<p>You can then use FakeTimeProvider in lots of powerful ways:</p>
+<ul>
+<li>Advance time immediately (like above)</li>
+<li>Timezone changes e.g. summertime</li>
+<li>Other countries’ timezones</li>
+</ul>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+      
+    </div>
+    
+    
+    <div class="article-category">
+      
+        <b>Categories:</b>
+        <a class="article-category-link" href="/categories/software-development/">software-development</a>
+      
+      
+        <br/>
+      
+      
+        <b>Tags:</b>
+        <a class="article-tag-none-link" href="/tags/c/" rel="tag">c#</a>, <a class="article-tag-none-link" href="/tags/dotnet/" rel="tag">dotnet</a>, <a class="article-tag-none-link" href="/tags/python/" rel="tag">python</a>
+      
+    </div>
+    
+    
+  </div>
+</article>
+
+  
+<nav id="article-nav" class="article-nav">
+  
+    <span id="article-nav-newer" class="article-nav-link-wrap newer"></span>
+  
+  
+    <a href="/2024/02/10/Horizon/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">
+        
+          Horizon
+        
+      </div>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+    </div>
+  </div>
+  
+
+
+
+
+<div id="settings-container">
+  <div id="dark-mode">dark</div>
+  <div id="sans-font">sans</div>
+</div>
+<script type="text/javascript">
+let d=document,r=d.documentElement.style,f=r.setProperty.bind(r),l=localStorage,s=l.getItem('s')||(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches),n=l.getItem('n'),m=d.getElementById("dark-mode"),b=()=>{f('--bg-color','#fafafa');f('--code-bg-color','#f4f4f4');f('--text-color','#212121');f('--secondary-color','#808080');f('--tertiary-color','#b0b0b0');f('--link-color','#b5c8cf');f('--link-hover-color','#618794');f('--link-bg-color','#dae4e7');f('--selection-color','#dae4e7');m.innerHTML="dark"},c=()=>{f('--bg-color','#212121');f('--code-bg-color','#292929');f('--text-color','#fff');f('--secondary-color','#c0c0c0');f('--tertiary-color','#6e6e6e');f('--link-color','#4d6b75');f('--link-hover-color','#96b1bb');f('--link-bg-color','#5d828e');f('--selection-color','#acc1c9');m.innerHTML="light"},o=d.getElementById("sans-font"),e=()=>{f('--body-stack','"Lora", "Georgia", "Times New Roman", serif');o.innerHTML="sans"},g=()=>{f('--body-stack','"Lato", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "Verdana", sans-serif');o.innerHTML="serif"};m.onclick=()=>{if(s==2){s=1;l.setItem('s',s);c()}else{s=2;l.setItem('s',s);b()}};o.onclick=()=>{if(n==2){n=1;l.setItem('n',n);g()}else{n=2;l.setItem('n',n);e()}};if(!s){s=2;l.setItem('s',2)};if(s==1){c()};if(!n){n=2;l.setItem('n',2)};if(n==1){g()};
+</script>
+
+
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-000000000-0', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+</body>
+</html>
