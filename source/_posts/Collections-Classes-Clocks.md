@@ -11,7 +11,7 @@ tags:
 
 Here's a talk I did at a local tech meet-up event. This blog post is, unashamedly, *NET 8 for the Nerds*.
 
-I was _meant_ to be speaking about the new Microsoft .NET 8 release, but decided to be rebellious and talk about Python instead. Partly, my excuse was that tech meet-ups are more fun if there are different technologies.
+I was _meant_ to be speaking about the new Microsoft .NET 8 release, but decided to be rebellious and talk lots about Python instead. Partly, my excuse was that tech meet-ups are more fun if there are different technologies.
 
 But, struggling for a better excuse, I decided to talk about new language features that are moving C# closer towards the convenience of Python. Read on to be unconvinced.
 
@@ -138,19 +138,19 @@ Hang on. That's *shorter* than the Python equivalent!
 
 Some magic syntax coming from the new C# 12 specification. We used a few recent-ish features from prior C# specifications too:
 
-* C# 12: Primary Constructors. [^3]. A bit like we see in the recent `record` class definitions we gained in C# 10. (although record classes expose the field publicly, whereas classes with primary constructors don't.)
+* C# 12: Primary Constructors[^3]. A bit like we see in the recent `record` class definitions we gained in C# 10. (although record classes expose the field publicly, whereas classes with primary constructors don't.)
 * C# 10: Destructuring of objects into variables (since C# 7 with some restrictions)
 * C# 6: Expression-bodied members
 
 # 3. Clocks
 
-To be fair I've dropped the Python excuse totally now, but I do want to talk about the most *significant* new feature to appear in .NET for many a long year.
+To be fair I've dropped the Python rebellion pretence now, but I do want to talk about the most **significant** new feature to appear in .NET for many a long year.
 
 Let's talk time.
 
 ## So you're not afraid of working with time?
 
-Time is one of the most difficult concepts in programming, in my opinion. If you live somewhere with a summertime timezone offset, just start with that. **Can you think of any assumptions people typically make?**
+Time is one of the most difficult concepts in programming. Need persuading? If you live somewhere with a summertime timezone offset, just start with that. **Can you think of any unsafe assumptions people typically make?**
 
 {% spoiler some falsehoods about time %}
 
